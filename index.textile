@@ -1,0 +1,28 @@
+---
+layout: master
+title: Caplin Trader 4 Demo
+---
+
+h2. Vertically Divided
+
+
+<a href="/upper-lower.html">Upper/Lower Division</a>
+
+
+h2. Restrictions to allow better user interaction
+
+If you have a very generic way of describing the user interface similar to
+the one in Webcentric, there is very few rules that can be applied to allow
+for gestures. Must gestures must be programmed as special cases adding
+to the required development/testing/maintenance.
+
+The CT4 user interface should run on a windowing model where the interface is
+divided into predefined areas. These areas have well defined interactions 
+and behaviour.
+
+It has been said that good design comes from taking away until just before
+it would be too much.
+
+In a similar vein we should be specific about how the interface behaves
+and make an implementation that reflects this, but not go so far that we
+don't have room for useful variations in the application.
