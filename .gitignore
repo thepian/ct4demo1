@@ -1,0 +1,6 @@
+.Python
+*.pyc
+.DS_Store
+.svn
+_site/
+target/
