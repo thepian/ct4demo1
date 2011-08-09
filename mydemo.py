@@ -38,6 +38,7 @@ def main(script_path,script_name):
     
     import site
     setattr(site, "TEMPLATES_DIR", join(script_path,"templates"))
+    setattr(site, "CSS_DIR", join(script_path,"css"))
     setattr(site, "CONF_DIR", join(script_path,"conf"))
     setattr(site, "SEED_DIR", join(script_path,"seed"))
     

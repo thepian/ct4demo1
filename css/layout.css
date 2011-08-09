@@ -1,0 +1,28 @@
+.indicator {
+	overflow: visible;
+}
+
+.content {
+	position: absolute;
+	left:0;
+	width:100%;
+	top: 20px;
+	bottom: 20px;
+}
+
+/* Upper and Lower */
+.upper,.lower,.divider {
+	width:100%;
+}
+.lower-third .upper {
+	height: 66%;
+}
+.lower-third .lower {
+	height: 33%;
+}
+
+.divider {
+	position: relative;
+	top: -5px; height: 10px;
+	background: black;
+}
