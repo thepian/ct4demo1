@@ -6,12 +6,12 @@ layout: master
 
 ##Summary:
 
-You can run this by accessing the static website in _site, or by running 
-Jekyll, which is a Ruby application.
+You can run this by accessing the static website in \_site, 
+or by running Jekyll, which is a Ruby application.
 
-1) Install Ruby
-2) 'gem install jekyll'
-3) 'gem install RedCloth'
+1. Install Ruby
+2. 'gem install jekyll'
+3. 'gem install RedCloth'
 
 More info at https://github.com/mojombo/jekyll/wiki
 
