@@ -5,9 +5,6 @@ title: Caplin Trader 4 Demo
 
 h1. Experiments
 
-For how to host this ( "README":/README/ )
-
-
 h2. Upper/Lower Division
 
 Initially I thought of using the HTML5 Drag-n-drop API, but I can't find a way to
@@ -26,12 +23,12 @@ Options 2-6 can be supported without conflicting with the interactions for other
 elements. Each of them should be pretty straightforward to implement.
 I would suggest implementing those first and add 1 if it actually is needed.
 
-# <a href="/upper-lower">Upper/Lower Division</a>
+# "Upper/Lower Division":upper-lower
 
 
 h2. Breakout Window
 
-# <a href="/breakout">Breakout Window</a>
+# "Breakout Window":breakout
 
 
 h2. Other Devices / Apps
