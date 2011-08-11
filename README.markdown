@@ -1,7 +1,3 @@
----
-title: CT4 UI Experiments
-layout: master
----
 # CT4 UI Experiments
 
 ##Summary:
