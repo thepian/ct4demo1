@@ -5,7 +5,7 @@ description: CT4 Demo.
 author: Henrik Vendelbo
 email: henrik@thepia.com
     
-exclude: _design, Rakefile, Library, conf, *.py
+exclude: _design, Rakefile, Library, conf, mydemo.py, testing.log, templates
 destination: _site
 lsi: false
 pygments: true
