@@ -3,18 +3,16 @@
 <head>
   {% include ipad_noscale_html5_head.html %}
 
-{% case page.thirds  %}
+{% case page.simple  %}
 {% when 'production' %}
-  <link rel="stylesheet" type="text/css" href="/css/thirds.css" media="screen">
-{% when 'development' %}
-  <link rel="stylesheet/less" type="text/css" href="/less/thirds.less" media="screen" title="thirds_css"/>
-{% endcase %}
 
-{% case page.fourths  %}
-{% when 'production' %}
-  <link rel="stylesheet" type="text/css" href="/css/fourths.css" media="screen">
+  <link rel="stylesheet" href="/css/screen.css?v=1" type="text/css" media="screen, projection">
+  <link rel="stylesheet" href="/css/print.css?v=1" type="text/css" media="print">
+  <!--[if IE]><link rel="stylesheet" href="/css/ie.css?v=1" type="text/css" media="screen, projection"><![endif]-->
+  <link rel="stylesheet" href="/css/common.css?v=1" type="text/css" media="screen, projection">
+
 {% when 'development' %}
-  <link rel="stylesheet/less" type="text/css" href="/less/fourths.less" media="screen" title="fourths_css"/>
+  <link rel="stylesheet/less" type="text/css" href="/less/screen.less" media="screen" title="screen_css"/>
 {% endcase %}
 
 
@@ -65,7 +63,8 @@
   <script type="text/javascript" src="/js/libs/jQuery/jquery.mousewheel.js"></script>
   <script type="text/javascript" src="/js/jScrollPane-1.2.3.min.js"></script>
   <script type="text/javascript" src="/js/site.js"></script>
-
-
+{% if page.myscripts %}
+  <script type="text/javascript" src="{{page.myscripts}}"></script>
+{% endif %}
 </body>
 </html>

@@ -5,7 +5,7 @@ description: CT4 Demo.
 author: Henrik Vendelbo
 email: henrik@thepia.com
     
-exclude: _design, README.textile, Rakefile
+exclude: _design, Rakefile
 destination: _site
 lsi: false
 pygments: true

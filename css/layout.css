@@ -8,21 +8,50 @@
 	width:100%;
 	top: 20px;
 	bottom: 20px;
+	overflow: hidden;
 }
 
 /* Upper and Lower */
 .upper,.lower,.divider {
 	width:100%;
 }
-.lower-third .upper {
+.upper,.lower {
+	position: relative;
+	overflow: hidden;
+}
+.divided-100-0 .upper {
+	height: 100%;
+}
+.divided-100-0 .lower {
+	top: -10px;
+	height: 0%;
+}
+.divided-66-33 .upper {
 	height: 66%;
 }
-.lower-third .lower {
-	height: 33%;
+.divided-66-33 .lower {
+	top: -10px;
+	height: 34%;
+}
+.divided-33-66 .upper {
+	height: 34%;
+}
+.divided-33-66 .lower {
+	top: -10px;
+	height: 66%;
+}
+.divided-0-100 .upper {
+	height: 0;
+}
+.divided-0-100 .lower {
+	top: -10px;
+	height: 100%;
 }
 
+/* divider */
 .divider {
 	position: relative;
 	top: -5px; height: 10px;
-	background: black;
+	background: #448;
+	z-index: 100;
 }
