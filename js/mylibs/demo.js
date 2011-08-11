@@ -1,5 +1,6 @@
 function do_stuff(ev){
 
+	/* DIVIDER */
 	var content = document.querySelectorAll(".content")[0];
 	var divider = document.querySelectorAll(".content .divider")[0];
 	var divider_up = document.querySelectorAll(".content .divider-up")[0];
@@ -69,7 +70,102 @@ function do_stuff(ev){
 		this.style.opacity = "0.6";
 		//this.style.backgroundColor = "red";
 	}
+
+	/* BREAKOUT BUTTONS */
+	var breakoutButtons = document.querySelectorAll("button.breakout");
+	[].forEach.call(breakoutButtons,function(el) {
+		if (el.addEventListener) {
+			el.addEventListener("click",handleBreakoutButton,false);
+		} else {
+			el.attachEvent("onclick",handleBreakoutButton,false);
+		}
+	});
+
+	function handleBreakoutButton(ev) {
+		var panel = this.parentNode;
+		var url = window.location.href + "#" + panel.id;
+		window.open(url);
+	}
 	
+	/* PANELS */
+	var panels = document.querySelectorAll(".content .panel");
+	[].forEach.call(panels,function(el) {
+		if (el.addEventListener) {
+			el.addEventListener("dragstart",handlePanelDragStart,false);
+			el.addEventListener("dragend",handlePanelDragEnd,false);
+		} else {
+			el.attachEvent("ondragstart",handlePanelDragStart,false);
+			el.attachEvent("ondragend",handlePanelDragEnd,false);
+		}
+	});
+	function handlePanelDragStart(ev) {
+		this.style.borderColor = "red";
+		this.style.borderStyle = "solid";
+
+		var url = window.location.href + "#" + this.id;
+
+		var dt = ev.dataTransfer;
+		// The Clipboard object has methods for setting and getting the data but Chromium hard codes to only support
+		// 'text', 'text/plain', 'text/plain;...', 'url' and 'text/uri-list'
+		dt.setData("url",url);
+		dt.setData("application/json", JSON.stringify({"url": url}) );
+		// dt.setData("text/csv", "http://www.mozilla.org");
+		// dt.setData("text/plain", "http://www.mozilla.org");
+
+		ev.dataTransfer.effectAllowed = "move";
+	}
+	function handlePanelDragEnd(ev) {
+		this.style.borderColor = "";
+		this.style.borderStyle = "";
+	}
+
+	/* DROP AREAS */
+	var dropAreas = document.querySelectorAll(".drop-area");
+	[].forEach.call(dropAreas,function(el) {
+		if (el.addEventListener) {
+			// el.addEventListener("dragenter",handlePanelDragEnter,false);
+			el.addEventListener("dragover",handlePanelDragOver,false);
+			// el.addEventListener("dragleave",handlePanelDragLeave,false);
+			el.addEventListener("drop",handlePanelDrop,false);
+		} else {
+			// el.attachEvent("ondragenter",handlePanelDragEnter,false);
+			el.attachEvent("ondragover",handlePanelDragOver,false);
+			// el.attachEvent("ondragleave",handlePanelDragLeave,false);
+			el.attachEvent("ondrop",handlePanelDrop,false);
+		}
+	});
+
+	function handlePanelDragEnter(ev) {
+		this.addClassName('over');
+	}
+	function handlePanelDragOver(ev) {
+		var isNewPage;
+		if (Array.__contains.call(ev.dataTransfer.types, "application/json")) {
+			var json = JSON.parse( ev.dataTransfer.getData("application/json") );
+			if (json.url) isNewPage = true;
+		}
+		else if (Array.__contains.call(ev.dataTransfer.types, "url")) {
+			isNewPage = true;
+		}
+		if (isNewPage) ev.preventDefault();
+
+		ev.dataTransfer.dropEffect = 'move';  // See the section on the DataTransfer object.
+  		this.addClassName('over');
+
+  		return !isNewPage;
+  	}
+	function handlePanelDragLeave(ev) {
+  		this.removeClassName('over');
+	}
+	function handlePanelDrop(ev) {
+		// var json = JSON.parse( ev.dataTransfer.getData("application/json") );
+		// var url = json.url;
+  		//event.target.textContent = url;
+  		var url = ev.dataTransfer.getData("url");
+  		ev.preventDefault();
+  
+  		console.info("dropped ",url);
+	}
 }
 
 if (Modernizr.draganddrop) {

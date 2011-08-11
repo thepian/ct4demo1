@@ -1,11 +1,16 @@
 ---
-title: Upper / Lower Demo
+title: Breakout Demo
 layout: master
 myscripts: /js/mylibs/demo.js
 simple: production
 ---
 <div class="indicators topleft"></div>
-<div class="indicators topcenter"></div>
+
+<div class="indicators topcenter">
+	<span class="drop-area" target="new-window">New Window</span>
+	<span class="drop-area" target="new-tab">New Tab</span>
+</div>
+
 <div class="indicators topright"></div>
 
 <style>
@@ -40,14 +45,18 @@ simple: production
 
 	<div class="upper">
 	
-		<div class="panel clearfix" id="panel-1" draggable="true"><table>
+		<div class="panel clearfix" id="panel-1" draggable="true">
+			<button class="breakout">Breakout</button>
+		<table>
 		<tr><td>a</td><td>b</td><td>c</td><td>d</td><td>e</td></tr>
 		<tr><td>a</td><td>b</td><td>c</td><td>d</td><td>e</td></tr>
 		<tr><td>a</td><td>b</td><td>c</td><td>d</td><td>e</td></tr>
 		<tr><td>a</td><td>b</td><td>c</td><td>d</td><td>e</td></tr>
 		</table></div>
 	
-		<div class="panel clearfix" id="panel-2" draggable="true"><table>
+		<div class="panel clearfix" id="panel-2" draggable="true">
+			<button class="breakout">Breakout</button>
+		<table>
 		<tr><td>a</td><td>b</td><td>c</td><td>d</td><td>e</td></tr>
 		<tr><td>a</td><td>b</td><td>c</td><td>d</td><td>e</td></tr>
 		<tr><td>a</td><td>b</td><td>c</td><td>d</td><td>e</td></tr>

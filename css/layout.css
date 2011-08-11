@@ -1,12 +1,31 @@
-.indicator {
+.indicators {
+	position: absolute;
 	overflow: visible;
+}
+.indicators.topleft {
+	left:0; top:0;
+}
+.indicators.topcenter {
+	left:50%; top:0;
+	margin-left:-100px;
+	width:200px;
+}
+.indicators.topright {
+	right:0; top:0;
+}
+
+.drop-area {
+	display: inline-block;
+	width:80px; height:30px;
+	text-align:center;
+	background: #aaa;
 }
 
 .content {
 	position: absolute;
 	left:0;
 	width:100%;
-	top: 20px;
+	top: 40px;
 	bottom: 20px;
 	overflow: hidden;
 }
