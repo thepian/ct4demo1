@@ -5,6 +5,9 @@ title: Caplin Trader 4 Demo
 
 h1. Experiments
 
+For how to host this ( "README":/README/ )
+
+
 h2. Upper/Lower Division
 
 Initially I thought of using the HTML5 Drag-n-drop API, but I can't find a way to
