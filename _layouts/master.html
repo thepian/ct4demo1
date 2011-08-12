@@ -44,6 +44,9 @@
   <META name="y_key" content="{{ site.y_key }}" />
 {% endif %}
 
+{% if page.window_name %}
+<script>window.name = "{{ page.window_name }}";</script>
+{% endif %}
 </head>
 
 <!-- http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->

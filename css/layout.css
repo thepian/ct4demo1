@@ -21,6 +21,10 @@
 	background: #aaa;
 }
 
+.indicators #make-tab {
+	display: none;
+}
+
 .content {
 	position: absolute;
 	left:0;

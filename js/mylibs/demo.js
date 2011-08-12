@@ -1,4 +1,44 @@
-function makeWindowPos() {
+function ManagedWindow(/*{panelId:panelId}*/config)
+{
+	this.panelId = config.panelId;
+	this.windowName = config.panelId;
+	this.url = config.url;
+	this.handle = null;
+}
+
+ManagedWindow.prototype.openWindow = function()
+{
+	var windowFeatures = this.features = this.makeWindowPos();
+	// windowFeatures.toolbar = "1";
+	// windowFeatures.menubar = "1";
+	// windowFeatures.location = "1";
+	// windowFeatures.resizable = "1";
+	// windowFeatures.scrollbars = "1";
+	// windowFeatures.status = "no";
+
+	windowFeatures.menubar = "no";
+	windowFeatures.location = "no";
+	windowFeatures.resizable = "yes";
+	windowFeatures.scrollbars = "yes";
+	windowFeatures.status = "no";
+	// 'toolbar=1,scrollbars=1,location=1,status=1,menubar=1,resizable=1
+
+	this.handle = window.open(this.url,this.windowName,windowFeatures.toString());
+	if (this.handle.focus) this.handle.focus();
+	
+};
+
+ManagedWindow.prototype.openTab = function()
+{
+	this.features = {};
+
+	var makeForm = document.getElementById("make-tab");
+	makeForm.setAttribute("target",this.windowName);
+	makeForm.setAttribute("action",this.url);
+	makeForm.submit();
+};
+
+ManagedWindow.prototype.makeWindowPos = function() {
 
 	function toString() {
 		var r = [];
@@ -22,7 +62,37 @@ function makeWindowPos() {
 	};
 
 	return pos;
+};
+
+var LAST_LAYOUT_ID = 0;
+
+function LayoutUrl(config)
+{
+	this.data = config;
 }
+
+LayoutUrl.prototype.toString = function()
+{
+	var r = [];
+	for(var n in this.data) {
+		r.push(n+"="+this.data[n]);
+	}
+	return "layout://" + r.join(",");
+};
+
+LayoutUrl.parse = function(url)
+{
+	if (url.indexOf("layout://") == 0) {
+		var r = {};
+		var bits = url.substring(9).split(",");
+		for(var i=0,b; b=bits[i]; ++i) {
+			var key_value = b.split("=");
+			r[key_value[0]] = key_value[1];
+		}
+		return new LayoutUrl(r);
+	}
+	return null;
+};
 
 function do_stuff(ev){
 
@@ -134,13 +204,18 @@ function do_stuff(ev){
 		this.style.borderColor = "red";
 		this.style.borderStyle = "solid";
 
-		var url = window.location.href + "#" + this.id;
+		// layout://panelId=5,width=100,height=50
+		var url = new LayoutUrl({
+			panelId: this.id,
+			width: this.offsetWidth,
+			height: this.offsetHeight
+		});
 
 		var dt = ev.dataTransfer;
 		// The Clipboard object has methods for setting and getting the data but Chromium hard codes to only support
 		// 'text', 'text/plain', 'text/plain;...', 'url' and 'text/uri-list'
-		dt.setData("url",url);
-		dt.setData("application/json", JSON.stringify({"url": url}) );
+		dt.setData("url",url.toString());
+		dt.setData("application/json", JSON.stringify({ "url": url.toString() }) );
 		// dt.setData("text/csv", "http://www.mozilla.org");
 		// dt.setData("text/plain", "http://www.mozilla.org");
 
@@ -192,33 +267,27 @@ function do_stuff(ev){
 	function handlePanelDrop(ev) {
 		// http://code.google.com/p/chromium/issues/detail?id=31037
 
+		var layout_id = ++LAST_LAYOUT_ID;
 		// var json = JSON.parse( ev.dataTransfer.getData("application/json") );
 		// var url = json.url;
   		//event.target.textContent = url;
   		var url = ev.dataTransfer.getData("url");
-  		var u_bits = url.split("#");
-  		var windowName = u_bits[1]; // Name shared with server for the resource
+  		var layoutUrl = LayoutUrl.parse(url);
+  		if (layoutUrl) {
+	  		var u_bits = location.href.split("#");
+	  		var windowUrl = u_bits[0].split("?")[0] + "../layouts/L"+layout_id+"#layout-L"+layout_id;
 
-  		var windowFeatures = makeWindowPos();
-  		// windowFeatures.toolbar = "1";
-  		// windowFeatures.menubar = "1";
-  		// windowFeatures.location = "1";
-  		// windowFeatures.resizable = "1";
-  		// windowFeatures.scrollbars = "1";
-  		// windowFeatures.status = "no";
+	  		var newwindow = new ManagedWindow({ panelId : url.panelId, url:windowUrl });
+	  		if (this.getAttribute("target") == "new-tab") {
+		  		newwindow.openTab();
+	  		} else {
+		  		newwindow.openWindow();
+	  		}
 
-  		windowFeatures.menubar = "no";
-  		windowFeatures.location = "no";
-  		windowFeatures.resizable = "yes";
-  		windowFeatures.scrollbars = "yes";
-  		windowFeatures.status = "no";
-  		// 'toolbar=1,scrollbars=1,location=1,status=1,menubar=1,resizable=1
-
-  		ev.preventDefault();
-  
-  		var newwindow = window.open(url,windowName,windowFeatures.toString());
-  		if (newwindow.focus) newwindow.focus();
-  		console.info("dropped ",url, "(",windowFeatures.toString(),")");
+	  		ev.preventDefault();
+	  
+	  		console.info("dropped ",windowUrl, "(",newwindow.features.toString(),")");
+  		}
 	}
 }
 
