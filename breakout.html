@@ -13,79 +13,17 @@ simple: production
 
 <div class="indicators topright"></div>
 
-<style>
-.panel {
-	float: left;
-	padding: .5em;
-	border: 1px dotted #888;
-}
-.panel tbody {
-	padding: .5em;
-	border-left: 1px dashed black;
-}
-.panel td {
-	padding: .5em;
-}
-
-#panel-1 {
-}
-
-#panel-2 {
-}
-
-#panel-3 {
-}
-
-#panel-4 {
-}
-
-</style>
-
 <div class="content divided-66-33">
 
 	<div class="upper">
-	
-		<div class="panel clearfix" id="panel-1" draggable="true">
-			<button class="breakout">Breakout</button>
-		<table>
-		<tr><td>a</td><td>b</td><td>c</td><td>d</td><td>e</td></tr>
-		<tr><td>a</td><td>b</td><td>c</td><td>d</td><td>e</td></tr>
-		<tr><td>a</td><td>b</td><td>c</td><td>d</td><td>e</td></tr>
-		<tr><td>a</td><td>b</td><td>c</td><td>d</td><td>e</td></tr>
-		</table></div>
-	
-		<div class="panel clearfix" id="panel-2" draggable="true">
-			<button class="breakout">Breakout</button>
-		<table>
-		<tr><td>a</td><td>b</td><td>c</td><td>d</td><td>e</td></tr>
-		<tr><td>a</td><td>b</td><td>c</td><td>d</td><td>e</td></tr>
-		<tr><td>a</td><td>b</td><td>c</td><td>d</td><td>e</td></tr>
-		<tr><td>a</td><td>b</td><td>c</td><td>d</td><td>e</td></tr>
-		</table></div>
-	
+{% include upper_panels.html %}	
 	</div>
 	<div class="divider">
 	<button class="divider-up">up</button>
 	<button class="divider-down">down</button>
 	</div>
 	<div class="lower">
-	
-		<div class="panel clearfix" id="panel-3" draggable="true"><table>
-		<tr><td>a</td><td>b</td><td>c</td><td>d</td><td>e</td></tr>
-		<tr><td>a</td><td>b</td><td>c</td><td>d</td><td>e</td></tr>
-		<tr><td>a</td><td>b</td><td>c</td><td>d</td><td>e</td></tr>
-		<tr><td>a</td><td>b</td><td>c</td><td>d</td><td>e</td></tr>
-		</table></div>
-	
-		<div class="panel clearfix" id="panel-4" draggable="true"><table>
-		<tr><td>a</td><td>b</td><td>c</td><td>d</td><td>e</td></tr>
-		<tr><td>a</td><td>b</td><td>c</td><td>d</td><td>e</td></tr>
-		<tr><td>a</td><td>b</td><td>c</td><td>d</td><td>e</td></tr>
-		<tr><td>a</td><td>b</td><td>c</td><td>d</td><td>e</td></tr>
-		</table></div>
-	
-	
-	
+{% include lower_panels.html %}	
 	</div>
 
 </div>

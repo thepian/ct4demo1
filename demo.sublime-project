@@ -1,0 +1,183 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 0,
+		"selected_items":
+		[
+		],
+		"width": 0
+	},
+	"console":
+	{
+		"height": 0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Sites/themaestro/Library/maestro/maestro/__init__.py",
+		"/Sites/essentialjs-site/templates/pagespec/local-suite-page.html",
+		"/Sites/pagespec/js/pagespec/assertion.js",
+		"/Sites/pagespec/js/pagespec/accessor.js",
+		"/Sites/pagespec/js/pagespec/matchers.js",
+		"/Sites/pagespec/js/pagecore/verify/generator.html",
+		"/Sites/pagespec/js/pagecore/xhr.js",
+		"/Sites/pagespec/js/pagecore/state.js",
+		"/Sites/pagespec/js/pagecore/constructive.js",
+		"/Sites/themaestro/Library/maestro/maestro/commands/make_html.py",
+		"/Sites/essentialjs-site/start-here.html",
+		"/Sites/essentialjs-site/templates/pagespec/selftest.html",
+		"/Sites/themaestro/Library/maestro/mediaserver/templates/verify/all.html",
+		"/Sites/themaestro/Library/maestro/mediaserver/database.py",
+		"/Sites/themaestro/Library/maestro/mediaserver/verify.py",
+		"/Sites/themaestro/Library/maestro/mediaserver/handlers/old.py",
+		"/Sites/themaestro/Library/maestro/mediaserver/urls.py",
+		"/Users/henrikvendelbo/Desktop/Self test sample.html",
+		"/Sites/themaestro/Library/maestro/mediaserver/handlers/results.py",
+		"/Users/hvendelbo/Library/Application Support/Sublime Text 2/Packages/User/Global.sublime-settings",
+		"/Users/hvendelbo/Library/Application Support/Sublime Text 2/Packages/User/Distraction Free.sublime-settings",
+		"/Sites/themaestro/src/tornado/tornado/web.py",
+		"/Sites/essentialjs-site/.gitignore",
+		"/Sites/pagespec/templates/verify/base.html",
+		"/Sites/pagespec/templates/verify/results.html",
+		"/Users/henrikvendelbo/Library/Application Support/Sublime Text 2/Packages/User/Global.sublime-settings",
+		"/Users/henrikvendelbo/Library/Application Support/Sublime Text 2/Packages/User/Base File.sublime-settings",
+		"/Users/henrikvendelbo/Library/Application Support/Sublime Text 2/Packages/User/Distraction Free.sublime-settings"
+	],
+	"find":
+	{
+		"height": 33
+	},
+	"find_in_files":
+	{
+		"height": 85,
+		"include_history":
+		[
+			""
+		],
+		"location_history":
+		[
+			"<open folders>"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"SITE_TITLE",
+			"print",
+			"pushSubject",
+			"sentence.replace",
+			"redis",
+			"UploadInput.push",
+			"VerifySource",
+			"config",
+			"parts",
+			"scriptPrefix",
+			"isPagespecTag",
+			"xsrf_token",
+			".render"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"folders":
+	{
+		"mount_points":
+		[
+			"/Sites/ct4demo1"
+		]
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0
+	},
+	"input":
+	{
+		"height": 27
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0,
+			1
+		],
+		"rows":
+		[
+			0,
+			1
+		]
+	},
+	"menu_visible": true,
+	"replace":
+	{
+		"height": 0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0,
+		"selected_items":
+		[
+		],
+		"width": 0
+	},
+	"select_project":
+	{
+		"height": 0,
+		"selected_items":
+		[
+		],
+		"width": 0
+	},
+	"show_minimap": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 258.92578125,
+	"status_bar_visible": true
+}

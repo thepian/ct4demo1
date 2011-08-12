@@ -74,3 +74,32 @@
 	background: #448;
 	z-index: 100;
 }
+
+
+/* PANEL */
+.panel {
+	float: left;
+	padding: .5em;
+	border: 1px dotted #888;
+}
+.panel tbody {
+	padding: .5em;
+	border-left: 1px dashed black;
+}
+.panel td {
+	padding: .5em;
+}
+
+#panel-1 {
+}
+
+#panel-2 {
+}
+
+#panel-3 {
+}
+
+#panel-4 {
+}
+
+

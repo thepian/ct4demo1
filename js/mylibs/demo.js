@@ -1,3 +1,29 @@
+function makeWindowPos() {
+
+	function toString() {
+		var r = [];
+		for(var n in this) {
+			if (typeof this[n] != "function") {
+				r.push(n + "=" + this[n]);
+			}
+		}
+		return r.join(",");
+	};
+
+	// screenX
+	// screenY
+	// innerHeight
+	// innerWidth
+	var pos = {
+		left: 0, top: 0,
+		width: 300, height: 300,
+
+		toString: toString
+	};
+
+	return pos;
+}
+
 function do_stuff(ev){
 
 	/* DIVIDER */
@@ -97,6 +123,12 @@ function do_stuff(ev){
 			el.attachEvent("ondragstart",handlePanelDragStart,false);
 			el.attachEvent("ondragend",handlePanelDragEnd,false);
 		}
+		var only_id = location.hash.substring(1);
+		if (only_id) {
+			if (only_id != el.id) {
+				el.style.display = "none";
+			}
+		}
 	});
 	function handlePanelDragStart(ev) {
 		this.style.borderColor = "red";
@@ -158,13 +190,35 @@ function do_stuff(ev){
   		this.removeClassName('over');
 	}
 	function handlePanelDrop(ev) {
+		// http://code.google.com/p/chromium/issues/detail?id=31037
+
 		// var json = JSON.parse( ev.dataTransfer.getData("application/json") );
 		// var url = json.url;
   		//event.target.textContent = url;
   		var url = ev.dataTransfer.getData("url");
+  		var u_bits = url.split("#");
+  		var windowName = u_bits[1]; // Name shared with server for the resource
+
+  		var windowFeatures = makeWindowPos();
+  		// windowFeatures.toolbar = "1";
+  		// windowFeatures.menubar = "1";
+  		// windowFeatures.location = "1";
+  		// windowFeatures.resizable = "1";
+  		// windowFeatures.scrollbars = "1";
+  		// windowFeatures.status = "no";
+
+  		windowFeatures.menubar = "no";
+  		windowFeatures.location = "no";
+  		windowFeatures.resizable = "yes";
+  		windowFeatures.scrollbars = "yes";
+  		windowFeatures.status = "no";
+  		// 'toolbar=1,scrollbars=1,location=1,status=1,menubar=1,resizable=1
+
   		ev.preventDefault();
   
-  		console.info("dropped ",url);
+  		var newwindow = window.open(url,windowName,windowFeatures.toString());
+  		if (newwindow.focus) newwindow.focus();
+  		console.info("dropped ",url, "(",windowFeatures.toString(),")");
 	}
 }
 
