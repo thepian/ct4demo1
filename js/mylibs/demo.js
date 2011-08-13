@@ -52,8 +52,7 @@ ManagedWindow.prototype.openTab = function()
 			that.handle = window.open(that.url,that.windowName,windowFeatures.toString());
 			if (that.handle.focus) that.handle.focus();
 			setTimeout(function(){
-				debugger;
-				that.handle.postMessage("hello","http://localhost:8000");
+				that.handle.postMessage("hello",location.protocol + "//" + location.host);
 				console.log("hello posted 2");
 			},50);
 		},50);		
@@ -62,8 +61,8 @@ ManagedWindow.prototype.openTab = function()
 
 function postMessageHandler(ev) {
 	console.log("message received.");
-	alert(ev);
-	debugger;	
+	//alert(ev);
+	//debugger;	
 }
 
 if (window.addEventListener) {
