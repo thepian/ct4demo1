@@ -189,7 +189,7 @@ function do_stuff(ev){
 	//divider.addEventListener("dragenter",handleDragEnter,false);
 	
 	function handleDragStart(ev) {
-		this.style.opacity = "0.4";
+		(ev.srcElement || this).style.opacity = "0.4";
 		//this.style.backgroundColor = "red";
 		//ev.dataTransfer.setData('text/plain', 'Drag Me Button');
 		//ev.dataTransfer.effectAllowed = "move";
@@ -197,7 +197,7 @@ function do_stuff(ev){
 	
 	function handleDragEnter(ev) {
 		ev.preventDefault();
-		this.style.opacity = "0.6";
+		(ev.srcElement || this).style.opacity = "0.6";
 		//this.style.backgroundColor = "red";
 	}
 
@@ -212,7 +212,7 @@ function do_stuff(ev){
 	});
 
 	function handleBreakoutButton(ev) {
-		var panel = this.parentNode;
+		var panel = (ev.srcElement || this).parentNode;
 		var url = window.location.href + "#" + panel.id;
 		window.open(url);
 	}
@@ -235,14 +235,14 @@ function do_stuff(ev){
 		}
 	});
 	function handlePanelDragStart(ev) {
-		this.style.borderColor = "red";
-		this.style.borderStyle = "solid";
+		(ev.srcElement || this).style.borderColor = "red";
+		(ev.srcElement || this).style.borderStyle = "solid";
 
 		// layout://panelId=5,width=100,height=50
 		var url = new LayoutUrl({
-			panelId: this.id,
-			width: this.offsetWidth,
-			height: this.offsetHeight
+			panelId: (ev.srcElement || this).id,
+			width: (ev.srcElement || this).offsetWidth,
+			height: (ev.srcElement || this).offsetHeight
 		});
 
 		var dt = ev.dataTransfer;
@@ -256,8 +256,8 @@ function do_stuff(ev){
 		ev.dataTransfer.effectAllowed = "move";
 	}
 	function handlePanelDragEnd(ev) {
-		this.style.borderColor = "";
-		this.style.borderStyle = "";
+		(ev.srcElement || this).style.borderColor = "";
+		(ev.srcElement || this).style.borderStyle = "";
 	}
 
 	/* DROP AREAS */
@@ -277,7 +277,7 @@ function do_stuff(ev){
 	});
 
 	function handlePanelDragEnter(ev) {
-		this.addClassName('over');
+		(ev.srcElement || this).addClassName('over');
 	}
 	function handlePanelDragOver(ev) {
 		var isNewPage;
@@ -296,7 +296,7 @@ function do_stuff(ev){
   		return !isNewPage;
   	}
 	function handlePanelDragLeave(ev) {
-  		this.removeClassName('over');
+  		(ev.srcElement || this).removeClassName('over');
 	}
 	function handlePanelDrop(ev) {
 		// http://code.google.com/p/chromium/issues/detail?id=31037

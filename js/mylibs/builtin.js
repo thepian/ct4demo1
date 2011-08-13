@@ -116,12 +116,17 @@ Array.prototype.__forEach = function( callbackfn, thisArg ) {
     T = thisArg;
   }
 
+  function hasEntry(obj,idx) {
+    if (obj.hasOwnProperty) return obj.hasOwnProperty(String(idx)) || obj.hasOwnProperty(idx);
+    return String(idx) in obj || idx in obj;
+  }
+
   while( k < len ) {
   
     // Store property key string object reference
     var Pk = String( k ),
       // Determine if property key is present in this object context
-      kPresent = O.hasOwnProperty( Pk ),
+      kPresent = hasEntry(O,k),
       kValue;
 
     if ( kPresent ) {
