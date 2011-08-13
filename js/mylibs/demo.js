@@ -1,7 +1,7 @@
 function ManagedWindow(/*{panelId:panelId}*/config)
 {
 	this.panelId = config.panelId;
-	this.windowName = config.panelId;
+	this.windowName = config.windowName || config.panelId;
 	this.url = config.url;
 	this.handle = null;
 }
@@ -35,8 +35,43 @@ ManagedWindow.prototype.openTab = function()
 	var makeForm = document.getElementById("make-tab");
 	makeForm.setAttribute("target",this.windowName);
 	makeForm.setAttribute("action",this.url);
-	makeForm.submit();
+
+	var windowFeatures = this.features = this.makeWindowPos();
+	windowFeatures.menubar = "no";
+	windowFeatures.location = "no";
+	windowFeatures.resizable = "yes";
+	windowFeatures.scrollbars = "yes";
+	windowFeatures.status = "no";
+
+	var that = this;
+	setTimeout(function(){
+		makeForm.submit();
+		console.log("form submitted");
+		setTimeout(function(){
+			console.log("opening ",that.url);
+			that.handle = window.open(that.url,that.windowName,windowFeatures.toString());
+			if (that.handle.focus) that.handle.focus();
+			setTimeout(function(){
+				debugger;
+				that.handle.postMessage("hello","http://localhost:8000");
+				console.log("hello posted 2");
+			},50);
+		},50);		
+	},50);
 };
+
+function postMessageHandler(ev) {
+	console.log("message received.");
+	alert(ev);
+	debugger;	
+}
+
+if (window.addEventListener) {
+	window.addEventListener("message",postMessageHandler,false);
+	console.log("message listener rdy");
+} else {
+	window.attachEvent("message",postMessageHandler);
+}
 
 ManagedWindow.prototype.makeWindowPos = function() {
 
@@ -277,7 +312,7 @@ function do_stuff(ev){
 	  		var u_bits = location.href.split("#");
 	  		var windowUrl = u_bits[0].split("?")[0] + "../layouts/L"+layout_id+"#layout-L"+layout_id;
 
-	  		var newwindow = new ManagedWindow({ panelId : url.panelId, url:windowUrl });
+	  		var newwindow = new ManagedWindow({ panelId : url.panelId, windowName: "layout-L"+layout_id, url:windowUrl });
 	  		if (this.getAttribute("target") == "new-tab") {
 		  		newwindow.openTab();
 	  		} else {
