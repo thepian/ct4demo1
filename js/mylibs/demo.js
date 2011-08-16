@@ -1,9 +1,29 @@
+/**
+ * Create an instance for managing a browser window.
+ * If no parameter is supplied manage the current window
+ * Otherwise a dict of parameters must be supplied
+ *
+ * @param config Config dict
+ */
 function ManagedWindow(/*{panelId:panelId}*/config)
 {
-	this.panelId = config.panelId;
-	this.windowName = config.windowName || config.panelId;
-	this.url = config.url;
-	this.handle = null;
+	if (config) {
+		// other window
+		this.panelId = config.panelId;
+		this.windowName = config.windowName || config.panelId;
+		this.url = config.url;
+		this.handle = null;
+	}
+	else {
+		/* Grap page positioning parameters */	
+		this.layout = LayoutUrl.parse(location.hash);
+
+		// this window
+		this.panelId = this.layout? this.layout.panelId : null;
+		this.windowName;
+		this.url = location.href;
+		this.handle = null;
+	}
 }
 
 ManagedWindow.prototype.openWindow = function()
@@ -24,7 +44,11 @@ ManagedWindow.prototype.openWindow = function()
 	// 'toolbar=1,scrollbars=1,location=1,status=1,menubar=1,resizable=1
 
 	this.handle = window.open(this.url,this.windowName,windowFeatures.toString());
-	if (this.handle.focus) this.handle.focus();
+	if (this.handle) {
+		if (this.handle.focus) this.handle.focus();
+	} else {
+		console.log("Couldn't open window",this.windowName)
+	}
 	
 };
 
@@ -98,12 +122,46 @@ ManagedWindow.prototype.makeWindowPos = function() {
 	return pos;
 };
 
+ManagedWindow.prototype.measureChrome = function()
+{
+	this.chromeWidth = window.outerWidth - window.innerWidth;
+	this.chromeHeight = window.outerHeight - window.innerHeight;
+
+	var content = document.querySelectorAll(".content")[0];
+	this.chromeHeight -= content.parentNode.offsetHeight - content.offsetHeight;
+};
+
+
+
 var LAST_LAYOUT_ID = 0;
 
 function LayoutUrl(config)
 {
 	this.data = config;
 }
+
+LayoutUrl.prototype.setLayoutId = function(layoutId)
+{
+	this.layoutId = layoutId;
+};
+
+LayoutUrl.prototype.getWindowName = function()
+{
+	return "layout-L"+this.layoutId;	
+};
+
+LayoutUrl.prototype.getWindowUrl = function()
+{
+	var r = [];
+	for(var n in this.data) {
+		r.push(n+"="+this.data[n]);
+	}
+
+	var u_bits = location.href.split("#");
+	var windowUrl = u_bits[0].split("?")[0] + "../layouts/L"+this.layoutId+"#layout-L"+this.layoutId + "?" + r.join(",");	
+
+	return windowUrl;
+};
 
 LayoutUrl.prototype.toString = function()
 {
@@ -125,8 +183,26 @@ LayoutUrl.parse = function(url)
 		}
 		return new LayoutUrl(r);
 	}
+	if (url.indexOf("#") == 0) {
+		var ba = url.substring(1).split("?");
+
+		var r = {};
+		var bits = ba[1].split(",");
+		for(var i=0,b; b=bits[i]; ++i) {
+			var key_value = b.split("=");
+			r[key_value[0]] = key_value[1];
+		}
+		var layout = new LayoutUrl(r)
+		layout.layoutId = ba[0];
+
+		return layout;
+	}
 	return null;
 };
+
+
+/* This window */
+var THIS_WINDOW = new ManagedWindow();
 
 function do_stuff(ev){
 
@@ -216,7 +292,7 @@ function do_stuff(ev){
 		var url = window.location.href + "#" + panel.id;
 		window.open(url);
 	}
-	
+
 	/* PANELS */
 	var panels = document.querySelectorAll(".content .panel");
 	[].forEach.call(panels,function(el) {
@@ -228,12 +304,44 @@ function do_stuff(ev){
 			el.attachEvent("ondragend",handlePanelDragEnd,false);
 		}
 		var only_id = location.hash.substring(1);
+		if (THIS_WINDOW.layout) {
+			only_id = THIS_WINDOW.layout.data.panelId;
+		}
 		if (only_id) {
 			if (only_id != el.id) {
 				el.style.display = "none";
 			}
 		}
 	});
+
+	if (THIS_WINDOW.layout) {
+		THIS_WINDOW.measureChrome();
+		var newWidth = parseInt(THIS_WINDOW.layout.data.width) + THIS_WINDOW.chromeWidth;
+		var newHeight = parseInt(THIS_WINDOW.layout.data.height) + THIS_WINDOW.chromeHeight;
+		var newTop = THIS_WINDOW.layout.data.top!=null? parseInt(THIS_WINDOW.layout.data.top) : null;
+		var newLeft = THIS_WINDOW.layout.data.left!=null? parseInt(THIS_WINDOW.layout.data.left) : null;
+		var newRight = THIS_WINDOW.layout.data.right!=null? parseInt(THIS_WINDOW.layout.data.right) : null;
+		if (newRight != null) {
+			newLeft = newRight - newWidth;
+		} 
+		if (console.log) {
+			console.log("resizing to ",newWidth,",",newHeight);
+		}
+
+	    var browser=navigator.appName; 
+	    if (browser=="Microsoft Internet Explorer") { 
+	            window.dialogHeight = newHeight+'px'; 
+	            window.dialogWidth = newWidth+'px'; 
+	            //TODO dialogLeft
+	    } 
+	    else { 
+			window.resizeTo(newWidth,newHeight);
+			if (newTop != null) {
+				window.moveTo(newLeft,newTop);
+			}
+	    } 
+	}
+
 	function handlePanelDragStart(ev) {
 		(ev.srcElement || this).style.borderColor = "red";
 		(ev.srcElement || this).style.borderStyle = "solid";
@@ -282,8 +390,9 @@ function do_stuff(ev){
 	function handlePanelDragOver(ev) {
 		var isNewPage;
 		if (Array.__contains.call(ev.dataTransfer.types, "application/json")) {
-			var json = JSON.parse( ev.dataTransfer.getData("application/json") );
-			if (json.url) isNewPage = true;
+			isNewPage = true; // not allowed during over
+			// var json = JSON.parse( ev.dataTransfer.getData("application/json") );
+			// if (json.url) isNewPage = true;
 		}
 		else if (Array.__contains.call(ev.dataTransfer.types, "url")) {
 			isNewPage = true;
@@ -301,26 +410,28 @@ function do_stuff(ev){
 	function handlePanelDrop(ev) {
 		// http://code.google.com/p/chromium/issues/detail?id=31037
 
-		var layout_id = ++LAST_LAYOUT_ID;
 		// var json = JSON.parse( ev.dataTransfer.getData("application/json") );
 		// var url = json.url;
   		//event.target.textContent = url;
   		var url = ev.dataTransfer.getData("url");
   		var layoutUrl = LayoutUrl.parse(url);
   		if (layoutUrl) {
-	  		var u_bits = location.href.split("#");
-	  		var windowUrl = u_bits[0].split("?")[0] + "../layouts/L"+layout_id+"#layout-L"+layout_id;
+			var layout_id = ++LAST_LAYOUT_ID;
+  			layoutUrl.setLayoutId(layout_id);
 
-	  		var newwindow = new ManagedWindow({ panelId : url.panelId, windowName: "layout-L"+layout_id, url:windowUrl });
 	  		if (this.getAttribute("target") == "new-tab") {
+		  		var newwindow = new ManagedWindow({ panelId : url.panelId, windowName: layoutUrl.getWindowName(), url: layoutUrl.getWindowUrl() });
 		  		newwindow.openTab();
 	  		} else {
+	  			layoutUrl.data.top = window.screenY;
+	  			layoutUrl.data.right = window.screenX - 2;
+		  		var newwindow = new ManagedWindow({ panelId : url.panelId, windowName: layoutUrl.getWindowName(), url: layoutUrl.getWindowUrl() });
 		  		newwindow.openWindow();
 	  		}
 
 	  		ev.preventDefault();
 	  
-	  		console.info("dropped ",windowUrl, "(",newwindow.features.toString(),")");
+	  		console.info("dropped ",layoutUrl.getWindowUrl(), "(",newwindow.features.toString(),")");
   		}
 	}
 }
