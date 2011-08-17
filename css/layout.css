@@ -91,7 +91,7 @@
 	border-left: 1px dashed black;
 }
 .panel td {
-	padding: .5em;
+	padding: .5em 1em;
 }
 
 #panel-1 {
