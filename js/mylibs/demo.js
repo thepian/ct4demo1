@@ -206,6 +206,80 @@ var THIS_WINDOW = new ManagedWindow();
 
 function do_stuff(ev){
 
+	/* SIDE PANEL SCROLLING */
+	jQuery(".leftpanel").jScrollPane();
+
+	/* SIDE PANEL CONTROLS */
+	var sidecontrols = document.querySelectorAll(".sidecontrols button");
+	[].forEach.call(sidecontrols,function(el) {
+		if (el.addEventListener) {
+			el.addEventListener("click",handleSideControlButton,false);
+		} else {
+			el.attachEvent("onclick",handleSideControlButton,false);
+		}
+	});
+
+	var leftpanels = document.querySelectorAll(".leftpanel");
+	var rightpanels = document.querySelectorAll(".rightpanel");
+
+	var currentOpenLeft, currentOpenRight;
+
+	function handleSideControlButton(ev) {
+		var area = this.parentNode.parentNode;
+		var popId = this.getAttribute("data-pop-panel");
+		if (popId) {
+			var target = document.getElementById(popId);
+			var isLeft = /left/.test(this.parentNode.className);
+			if (isLeft) {
+				[].forEach.call(leftpanels,function(el){
+					el.className = el.className.replace(" toppanel "," ").replace("toppanel","");
+				});
+				target.className += " toppanel";
+
+				if (/leftopen/.test(area.className) && currentOpenLeft == popId) {
+					area.className = area.className.replace("leftopen","leftclosed");				
+					currentOpenLeft = null;
+				}
+				else if (/leftopen/.test(area.className) && currentOpenLeft != popId) {
+					// just swap side panel
+					currentOpenLeft = popId;
+				}
+				else if (/leftclosed/.test(area.className)) {
+					area.className = area.className.replace("leftclosed","leftopen");				
+					currentOpenLeft = popId;
+				}
+				else {
+					area.className += " leftopen";
+					currentOpenLeft = popId;
+				}
+
+			} else {
+				[].forEach.call(rightpanels,function(el){
+					el.className = el.className.replace(" toppanel "," ").replace("toppanel","");
+				});
+				target.className += " toppanel";
+
+				if (/rightopen/.test(area.className) && currentOpenRight == popId) {
+					area.className = area.className.replace("rightopen","rightclosed");				
+					currentOpenRight = null;
+				}
+				else if (/rightopen/.test(area.className) && currentOpenRight != popId) {
+					// just swap side panel
+					currentOpenRight = popId;					
+				}
+				else if (/rightclosed/.test(area.className)) {
+					area.className = area.className.replace("rightclosed","rightopen");				
+					currentOpenRight = popId;					
+				}
+				else {
+					area.className += " rightopen";
+					currentOpenRight = popId;					
+				}
+			}
+		}
+	}
+
+
 	/* DIVIDER */
 	var content = document.querySelectorAll(".content")[0];
 	var divider = document.querySelectorAll(".content .divider")[0];
