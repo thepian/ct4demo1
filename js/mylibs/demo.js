@@ -314,7 +314,7 @@ function do_stuff(ev){
 		}
 	});
 
-	if (THIS_WINDOW.layout) {
+	if (THIS_WINDOW.layout && THIS_WINDOW.layout.data.width) {
 		THIS_WINDOW.measureChrome();
 		var newWidth = parseInt(THIS_WINDOW.layout.data.width) + THIS_WINDOW.chromeWidth;
 		var newHeight = parseInt(THIS_WINDOW.layout.data.height) + THIS_WINDOW.chromeHeight;
@@ -420,6 +420,8 @@ function do_stuff(ev){
   			layoutUrl.setLayoutId(layout_id);
 
 	  		if (this.getAttribute("target") == "new-tab") {
+	  			delete layoutUrl.data.width;
+	  			delete layoutUrl.data.height;
 		  		var newwindow = new ManagedWindow({ panelId : url.panelId, windowName: layoutUrl.getWindowName(), url: layoutUrl.getWindowUrl() });
 		  		newwindow.openTab();
 	  		} else {
