@@ -1,6 +1,8 @@
 @import "style.css";
 @import "clearfix.css";
+@import "indicators.css";
 @import "layout.css";
+@import "component.css";
 @import "jquery.jscrollpane.css";
 
 /* Prevent the text contents of draggable elements from being selectable. */
