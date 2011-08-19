@@ -1,0 +1,20 @@
+$side-panel-width: 200px;
+$main-panel-transition: all .5s ease-in-out;
+$divided-transition: all .5s ease-in-out;
+
+@import "style.scss";
+@import "clearfix.scss";
+@import "indicators.scss";
+@import "layout.scss";
+@import "sidepanel.scss";
+@import "mainpanel.scss";
+@import "component.scss";
+@import "jquery.jscrollpane.css";
+
+/* Prevent the text contents of draggable elements from being selectable. */
+[draggable] {
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}

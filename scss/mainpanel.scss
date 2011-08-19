@@ -1,0 +1,41 @@
+.maintabs {
+	position: absolute;
+	top:0;
+	left:0; right:0;
+	height:25px;
+	-moz-transition: $main-panel-transition;
+    -webkit-transition: $main-panel-transition;
+    -o-transition: $main-panel-transition;
+    transition: $main-panel-transition;
+}
+.mainpanel {
+	position: absolute;
+	top:25px; bottom:0;
+	left:0; right:0;
+	-moz-transition: $main-panel-transition;
+    -webkit-transition: $main-panel-transition;
+    -o-transition: $main-panel-transition;
+    transition: $main-panel-transition;
+    /* overflow:hidden; */ overflow: auto;
+    background-color: white;
+    
+	.frontpanel {
+		z-index: 50;
+	}
+    
+	.upper & {
+		bottom: 12px;
+	}
+}
+
+.maintabs, .mainpanel {
+
+	.leftopen & {
+		left:200px;
+	}
+	.rightopen & {
+		right:200px;
+	}
+	
+}
+

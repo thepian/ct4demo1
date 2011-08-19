@@ -3,13 +3,20 @@
 ##Summary:
 
 You can run this by accessing the static website in \_site, 
-or by running Jekyll, which is a Ruby application.
+or by running Jekyll and Sass, which is a Ruby application.
 
 1. Install Ruby
 2. 'gem install jekyll'
 3. 'gem install RedCloth'
+4. 'gem install sass'
 
-More info at https://github.com/mojombo/jekyll/wiki
+1. Fire off 'jekyll --server --auto'
+2. 'sass --watch scss/screen.scss:css/screen.css scss/print.scss:css/print.css'
+3. Open 'localhost:4000' in the browser.
+
+More info at 
++ https://github.com/mojombo/jekyll/wiki
++ http://sass-lang.com/tutorial.html
 
 ###Major components:
 Mobile Boilerplate http://html5boilerplate.com v1.0 (code named Secret Diary)<br />

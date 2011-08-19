@@ -1,0 +1,110 @@
+.content {
+	position: absolute;
+	left:0;
+	width:100%;
+	top: 50px;
+	bottom: 50px;
+	overflow: hidden;
+}
+
+/* Upper and Lower */
+.upper,.lower,.divider {
+	/* Don't do to allow margins: width:100%; */
+}
+.upper,.lower {
+	position: relative;
+	overflow: hidden;
+	-moz-transition: $divided-transition;
+    -webkit-transition: $divided-transition;
+    -o-transition: $divided-transition;
+    transition: $divided-transition;
+}
+.divided-100-0 { 
+	.upper { height: 100%; }
+	.lower { top: -10px; height: 0; overflow:hidden; }
+}
+.divided-66-33 { 
+	.upper { height: 66%; }
+	.lower { top: -10px; height: 34%; }
+}
+.divided-33-66 { 
+	.upper { height: 34%; }
+	.lower { top: -10px; height: 66%; }
+}
+.divided-0-100 { 
+	.upper { height: 0; overflow:hidden; }
+	.lower { top: -10px; height: 100%; }
+}
+
+/* divider */
+.divider {
+	position: relative;
+	top: -12px; height: 25px;
+	background: #448;
+	z-index: 100;
+}
+
+.upper .panel-content {
+	margin-bottom: 12px;
+}
+.lower .panel-content {
+	margin-top: 12px;
+}
+.divided-0-100 {
+	.lower .panel-content { margin-top: 25px; }
+	.divider { top:0; }
+}
+.divided-100-0 {
+	.upper .panel-content { margin-bottom: 25px; }
+	.divider { top:-25px; }
+}
+
+/* SIDE PANELS */
+.upper {
+	margin-left:50px;
+	margin-right:50px;
+	overflow:visible;
+}
+.column-1 {
+	width:50%;
+	right-margin:50%;
+}
+.column-2 {
+	position:absolute;
+	width:50%;
+	top:0;
+	right:0;
+}
+
+.lower {
+	overflow:visible;
+}
+
+/* PANEL */
+.panel {
+	float: left;
+	padding: .5em;
+	border: 1px dotted #888;
+	
+	tbody {
+		padding: .5em;
+		border-left: 1px dashed black;
+	}
+	td {
+		padding: .5em 1em;
+	}
+}
+
+#panel-1 {
+}
+
+#panel-2 {
+}
+
+#panel-3 {
+}
+
+#panel-4 {
+}
+
+

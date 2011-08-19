@@ -1,0 +1,59 @@
+.leftcontrols, .rightcontrols {
+
+	.upper & {
+		position:absolute;
+		top:0; bottom:0;
+		width:50px;
+		text-align: center;
+		border-left:1px dotted black;
+		background-color:white;
+		z-index: 100; /* above toppanel */
+		overflow: hidden;
+
+		button {
+			width:30px;
+			margin:5px;
+			/* use text-align for now, display:block; */
+		}
+	}
+}
+
+.leftcontrols {
+	.upper & {
+		left: -50px;
+	}
+}
+.rightcontrols {
+	.upper & {
+		right: -50px;
+	}
+}
+
+.leftpanel,.rightpanel {
+	position:absolute;
+	top:0; bottom:0;
+	overflow: hidden;
+	-moz-transition: $main-panel-transition;
+    -webkit-transition: $main-panel-transition;
+    -o-transition: $main-panel-transition;
+    transition: $main-panel-transition;
+}
+
+.leftpanel {
+	left: -$side-panel-width; width: $side-panel-width;
+}
+.rightpanel {
+	right: -$side-panel-width; width: $side-panel-width;
+}
+
+.leftopen .leftpanel.toppanel {
+	left:0;
+}
+.rightopen .rightpanel.toppanel {
+	right:0;
+}
+
+.toppanel {
+	z-index:50;
+}
+
