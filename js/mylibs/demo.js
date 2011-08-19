@@ -335,20 +335,36 @@ function do_stuff(ev){
 		}
 	}
 	
-	//divider.addEventListener("dragstart",handleDragStart,false);
-	//divider.addEventListener("dragenter",handleDragEnter,false);
-	
-	function handleDragStart(ev) {
-		(ev.srcElement || this).style.opacity = "0.4";
-		//this.style.backgroundColor = "red";
-		//ev.dataTransfer.setData('text/plain', 'Drag Me Button');
-		//ev.dataTransfer.effectAllowed = "move";
+	/* MAINPANEL */
+	var mainPanels = document.querySelectorAll(".mainpanel .focusable");
+	[].forEach.call(mainPanels,function(el){
+		if (el.addEventListener) {
+			el.addEventListener("focus",handleFocusMainPanel,false);
+			el.addEventListener("blur",handleBlurMainPanel,false);
+		} else {
+			el.attachEvent("onfocus",handleFocusMainPanel);
+			el.attachEvent("onblur",handleBlurMainPanel);
+		}
+	});
+
+	function getComponent(ev,input,top) {
+		for(var e = input; e; e = e.parentNode) {
+			if (/mainpanel/.test(e.className)) return null;
+			if (/^component($| )/.test(e.className)) return e;
+		}
 	}
-	
-	function handleDragEnter(ev) {
-		ev.preventDefault();
-		(ev.srcElement || this).style.opacity = "0.6";
-		//this.style.backgroundColor = "red";
+
+	function handleFocusMainPanel(ev) {
+		event = event || ev;
+		var component = getComponent(event,event.srcElement || event.target);
+		if (! /activecomponent/.test(component.className)) {
+			component.className += " activecomponent";
+		}
+	}
+	function handleBlurMainPanel(ev) {
+		event = event || ev;
+		var component = getComponent(event,event.srcElement || event.target);
+		component.className = component.className.replace(" activecomponent","") + " inactivecomponent";
 	}
 
 	/* BREAKOUT BUTTONS */

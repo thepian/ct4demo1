@@ -42,18 +42,10 @@
 .lower .panel-content {
 	margin-top: 12px;
 }
-.divided-0-100 .lower .panel-content {
-	margin-top: 25px;
-}
-.divided-0-100 .divider {
-	top:0;
-}
-.divided-100-0 .upper .panel-content {
-	margin-bottom: 25px;
-}
-.divided-100-0 .divider {
-	top:-25px;
-}
+.divided-0-100 .lower .panel-content { margin-top: 25px; }
+.divided-0-100 .divider { top:0; }
+.divided-100-0 .upper .panel-content { margin-bottom: 25px; }
+.divided-100-0 .divider { top:-25px; }
 
 /* SIDE PANELS */
 .upper {
@@ -115,20 +107,51 @@
 	z-index:50;
 }
 
-.mainpanel {
+.maintabs {
 	position: absolute;
-	top:0; bottom:0;
+	top:0;
 	left:0; right:0;
+	height:25px;
 	-moz-transition: all .5s ease-in-out;
     -webkit-transition: all .5s ease-in-out;
     -o-transition: all .5s ease-in-out;
     transition: all .5s ease-in-out;
 }
+.mainpanel {
+	position: absolute;
+	top:25px; bottom:0;
+	left:0; right:0;
+	-moz-transition: all .5s ease-in-out;
+    -webkit-transition: all .5s ease-in-out;
+    -o-transition: all .5s ease-in-out;
+    transition: all .5s ease-in-out;
+    /* overflow:hidden; */ overflow: auto;
+    background-color: white;
+}
+.mainpanel.frontpanel {
+	z-index: 50;
+}
+.upper .mainpanel {
+	bottom: 12px;
+}
+.leftopen .maintabs,
 .leftopen .mainpanel {
 	left:200px;
 }
+.rightopen .maintabs,
 .rightopen .mainpanel {
 	right:200px;
+}
+
+.column-1 {
+	width:50%;
+	right-margin:50%;
+}
+.column-2 {
+	position:absolute;
+	width:50%;
+	top:0;
+	right:0;
 }
 
 .lower {

@@ -30,12 +30,23 @@ h2. Breakout Window
 
 # "Breakout Window":breakout
 
+"About Windows and Tabs":windows-and-tabs
+
+h2. Active Component
+
+Components within the panels can be shown as the active component. This happens when an
+input or other element within it gains focus.
+
+Active components pop out of the surface and enable additional manipulation controls.
+
+# "Active Component":active-component
 
 h2. Other Devices / Apps
 
 h2. Scroll Bars
 
 h2. Panel Configuration
+
 
 
 

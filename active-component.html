@@ -1,0 +1,36 @@
+---
+title: Upper / Lower Demo
+layout: master
+myscripts: /js/mylibs/demo.js
+simple: production
+---
+<div class="indicators topbg"></div>
+<div class="indicators topleft">
+<img src="../images/caplin-logo.png">
+</div>
+<div class="indicators topcenter"></div>
+<div class="indicators topright">
+<img src="../images/right-indicators.png">
+</div>
+
+<div class="indicators bottombg"></div>
+
+<div class="content divided-66-33">
+
+	<div class="upper">
+	
+{% include upper_active_panels.html %}	
+	
+	</div>
+	<div class="divider">
+	<button class="divider-up">up</button>
+	<button class="divider-down">down</button>
+	</div>
+	<div class="lower">
+	
+{% include lower_panels.html %}	
+	
+	</div>
+
+</div>
+

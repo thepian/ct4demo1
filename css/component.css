@@ -1,0 +1,12 @@
+.component {
+	position: relative;
+	border: 1px solid white;
+	overflow: visible;
+}
+.activecomponent {
+	border-color: yellow;
+	z-index: 10;
+}
+.activecomponent .component-content {
+	margin: -10px;
+}
