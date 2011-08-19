@@ -347,10 +347,15 @@ function do_stuff(ev){
 		}
 	});
 
-	function getComponent(ev,input,top) {
+	function getComponent(ev,input) {
 		for(var e = input; e; e = e.parentNode) {
 			if (/mainpanel/.test(e.className)) return null;
 			if (/^component($| )/.test(e.className)) return e;
+		}
+	}
+	function getPanel(ev,input) {
+		for(var e = input; e; e = e.parentNode) {
+			if (/mainpanel/.test(e.className)) return e;
 		}
 	}
 
@@ -358,13 +363,20 @@ function do_stuff(ev){
 		event = event || ev;
 		var component = getComponent(event,event.srcElement || event.target);
 		if (! /activecomponent/.test(component.className)) {
-			component.className += " activecomponent";
+			component.className = component.className.replace(/ inactivecomponent/,"").replace(/ activecomponent/,"") + " activecomponent";
+		}
+		var panel = getPanel(event,event.srcElement || event.target);
+		if (! /activepanel/.test(panel.className)) {
+			panel.className = panel.className.replace(/ inactivepanel/,"").replace(/ activepanel/,"") + " activepanel";
 		}
 	}
 	function handleBlurMainPanel(ev) {
 		event = event || ev;
 		var component = getComponent(event,event.srcElement || event.target);
-		component.className = component.className.replace(" activecomponent","") + " inactivecomponent";
+		component.className = component.className.replace(/ activecomponent/,"").replace(/ inactivecomponent/,"") + " inactivecomponent";
+
+		var panel = getPanel(event,event.srcElement || event.target);
+		panel.className = panel.className.replace(/ activepanel/,"").replace(/ inactivepanel/,"") + " inactivepanel";
 	}
 
 	/* BREAKOUT BUTTONS */

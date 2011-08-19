@@ -539,6 +539,8 @@ only screen and (min-device-pixel-ratio : 1.5) {
     z-index: 50; }
   .upper .mainpanel {
     bottom: 12px; }
+  .mainpanel .panel-content {
+    margin: 5px; }
 
 .leftopen .maintabs, .leftopen .mainpanel {
   left: 200px; }
@@ -550,12 +552,18 @@ only screen and (min-device-pixel-ratio : 1.5) {
   border: 1px solid white;
   overflow: visible; }
 
+.component .component-content {
+  margin: 5px;
+  border: 3px solid white;
+  background: white; }
+
 .activecomponent {
   border-color: yellow;
   z-index: 10; }
 
 .activecomponent .component-content {
-  margin: -10px; }
+  margin: -6px;
+  border: 3px solid #444; }
 
 @import url(jquery.jscrollpane.css);
 /* Prevent the text contents of draggable elements from being selectable. */

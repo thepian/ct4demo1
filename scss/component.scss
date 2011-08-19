@@ -3,10 +3,17 @@
 	border: 1px solid white;
 	overflow: visible;
 }
+.component .component-content {
+	margin: 5px;
+	border: 3px solid white;
+	background: white;
+}
+
 .activecomponent {
 	border-color: yellow;
 	z-index: 10;
 }
 .activecomponent .component-content {
 	margin: -10px;
+	border: 3px solid #444;
 }
