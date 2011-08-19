@@ -3,56 +3,56 @@ layout: master
 title: Caplin Trader 4 Demo
 ---
 
-h1. Experiments
+# Experiments
 
-h2. Upper/Lower Division
+## Upper/Lower Division
 
 Initially I thought of using the HTML5 Drag-n-drop API, but I can't find a way to
 restrict the movement to vertical. Sliding the content up and down for every mouse 
 move might proved a bit intensive.
 
 Then I realised that there could be several ways to change the divider:
-1) Grab-and-drag with mouse or finger (divider needs to be thick)
-2) Keyboard hotkey.
-3) Double-click
-4) Place up and down arrows on the divider
-5) Scroll wheel while over the divider
-6) Multi-finger swipe while over the divider or content.
+1. Grab-and-drag with mouse or finger (divider needs to be thick)
+2. Keyboard hotkey.
+3. Double-click
+4. Place up and down arrows on the divider
+5. Scroll wheel while over the divider
+6. Multi-finger swipe while over the divider or content.
 
 Options 2-6 can be supported without conflicting with the interactions for other 
 elements. Each of them should be pretty straightforward to implement.
 I would suggest implementing those first and add 1 if it actually is needed.
 
-# "Upper/Lower Division":upper-lower
+1. [Upper/Lower Division](upper-lower)
 
 
-h2. Breakout Window
+## Breakout Window
 
-# "Breakout Window":breakout
+1. "Breakout Window":breakout
 
-"About Windows and Tabs":windows-and-tabs
+[About Windows and Tabs](windows-and-tabs)
 
-h2. Active Component
+## Active Component
 
 Components within the panels can be shown as the active component. This happens when an
 input or other element within it gains focus.
 
 Active components pop out of the surface and enable additional manipulation controls.
 
-# "Active Component":active-component
+1. [Active Component](active-component)
 
-h2. Other Devices / Apps
+## Other Devices / Apps
 
-h2. Scroll Bars
+## Scroll Bars
 
-h2. Panel Configuration
-
-
+## Panel Configuration
 
 
-h1. Principles
 
-h2. Vertically Divided
+
+# Principles
+
+## Vertically Divided
 
 The panels are placed in one of two docking areas. 
 The areas take up the full width of the UI. These areas share the available 
@@ -65,7 +65,7 @@ and swiping gestures can be used to change the split.
 This means that when you drag a panel to a device or other window it will be placed 
 in its home area. It also makes testing and documentation much simpler.
 
-h3. Indicators are not Panels
+### Indicators are not Panels
 
 In addition to the content, indicators can be added along the top and bottom edges.
 In this Demo the bottom edge is not used, but some clients may want to use it.
@@ -73,14 +73,14 @@ Panels are configured with a home area as either upper or lower.
 For constrained size devices like phones the areas will be implemented diffrently, 
 but there will be a similar home area affinity for a panel.
 
-h2. Side Panels
+## Side Panels
 
 You can mark panels in the upper and lower areas as side panels, either to the 
 left or to the right.
 In this Demo side panels are only added to the upper area, but it remains possible
 to add them to the lower.
 
-h2. Restrictions to allow better user interaction
+## Restrictions to allow better user interaction
 
 If you have a very generic way of describing the user interface similar to
 the one in Webcentric, there are very few rules that can be applied to allow
@@ -98,13 +98,13 @@ In a similar vein we should be specific about how the interface behaves
 and make an implementation that reflects this, but not go so far that we
 don't have room for useful variations in the application.
 
-h2. Starting with a Feature Subset
+## Starting with a Feature Subset
 
 Initially we experiment with a subset of the features in CT2/CT3 to build a
 consistent core experience. Subsequently we can get a feel for how/if to 
 integrate the remaining features like multiple layouts.
 
-h2. App, Page and Layout Serving
+## App, Page and Layout Serving
 
 When the webapp page is served it is put together on the server based on a layout.
 The page will hold the initial state of the page as shown in the browser.
@@ -113,6 +113,6 @@ This allows for a very quick response.
 Rather than switching between layouts within the same web page, use the web browser
 to open multiple tabs or windows with a layout in each.
 
-h2. Edge cases to review
+## Edge cases to review
 
 Single panel ripped into a window without any additional panels.
