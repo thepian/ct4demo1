@@ -1,5 +1,5 @@
 /**
- * HTML5 ✰ Boilerplate 
+ * HTML5 ✰ Boilerplate
  *
  * style.css contains a reset, font normalization and some base styles.
  *
@@ -355,16 +355,17 @@ only screen and (min-device-pixel-ratio : 1.5) {
 .upper, .lower {
   position: relative;
   overflow: hidden;
-  -moz-transition: all .5s ease-in-out;
-  -webkit-transition: all .5s ease-in-out;
-  -o-transition: all .5s ease-in-out;
-  transition: all .5s ease-in-out; }
+  -moz-transition: all 0.5s ease-in-out;
+  -webkit-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out; }
 
 .divided-100-0 .upper {
   height: 100%; }
 .divided-100-0 .lower {
   top: -10px;
-  height: 0%; }
+  height: 0;
+  overflow: hidden; }
 
 .divided-66-33 .upper {
   height: 66%; }
@@ -379,7 +380,8 @@ only screen and (min-device-pixel-ratio : 1.5) {
   height: 66%; }
 
 .divided-0-100 .upper {
-  height: 0; }
+  height: 0;
+  overflow: hidden; }
 .divided-0-100 .lower {
   top: -10px;
   height: 100%; }
@@ -414,63 +416,6 @@ only screen and (min-device-pixel-ratio : 1.5) {
   margin-right: 50px;
   overflow: visible; }
 
-.upper .leftcontrols {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: -50px;
-  width: 50px;
-  text-align: center;
-  border-right: 1px dotted black;
-  background-color: white;
-  z-index: 100;
-  /* above toppanel */ }
-
-.upper .rightcontrols {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: -50px;
-  width: 50px;
-  text-align: center;
-  border-left: 1px dotted black;
-  background-color: white;
-  z-index: 100;
-  /* above toppanel */ }
-
-.upper .leftcontrols button,
-.upper .rightcontrols button {
-  width: 30px;
-  margin: 5px;
-  /* use text-align for now, display:block; */ }
-
-.leftpanel, .rightpanel {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  -moz-transition: all .5s ease-in-out;
-  -webkit-transition: all .5s ease-in-out;
-  -o-transition: all .5s ease-in-out;
-  transition: all .5s ease-in-out; }
-
-/* 200px */
-.leftpanel {
-  left: -200px;
-  width: 200px; }
-
-.rightpanel {
-  right: -200px;
-  width: 200px; }
-
-.leftopen .leftpanel.toppanel {
-  left: 0; }
-
-.rightopen .rightpanel.toppanel {
-  right: 0; }
-
-.toppanel {
-  z-index: 50; }
-
 .column-1 {
   width: 50%;
   right-margin: 50%; }
@@ -502,9 +447,10 @@ only screen and (min-device-pixel-ratio : 1.5) {
   width: 50px;
   text-align: center;
   border-left: 1px dotted black;
-  background-color: white;
   z-index: 100;
-  /* above toppanel */ }
+  /* above toppanel */
+  overflow: hidden;
+  background-color: #a7a7a7; }
   .upper .leftcontrols button, .upper .rightcontrols button {
     width: 30px;
     margin: 5px;
@@ -512,6 +458,28 @@ only screen and (min-device-pixel-ratio : 1.5) {
 
 .upper .leftcontrols {
   left: -50px; }
+.leftcontrols button.active-finder {
+  width: 36px;
+  height: 30px;
+  border: 0 none;
+  background-image: url(../images/button/active-finder.png);
+  background-repeat: no-repeat;
+  background-position: 50% 50%; }
+.leftcontrols button.chat {
+  width: 36px;
+  height: 30px;
+  border: 0 none;
+  background-image: url(../images/button/chat-3.png);
+  background-repeat: no-repeat;
+  background-position: 50% 50%; }
+.leftcontrols button.help {
+  position: absolute;
+  left: 5px;
+  bottom: 20px;
+  border: 0 none;
+  background-image: url(../images/button/help.png);
+  background-repeat: no-repeat;
+  background-position: 50% 50%; }
 
 .upper .rightcontrols {
   right: -50px; }
@@ -520,6 +488,7 @@ only screen and (min-device-pixel-ratio : 1.5) {
   position: absolute;
   top: 0;
   bottom: 0;
+  overflow: hidden;
   -moz-transition: all 0.5s ease-in-out;
   -webkit-transition: all 0.5s ease-in-out;
   -o-transition: all 0.5s ease-in-out;
@@ -566,7 +535,7 @@ only screen and (min-device-pixel-ratio : 1.5) {
   /* overflow:hidden; */
   overflow: auto;
   background-color: white; }
-  .mainpanel .frontpanel {
+  .mainpanel.frontpanel {
     z-index: 50; }
   .upper .mainpanel {
     bottom: 12px; }

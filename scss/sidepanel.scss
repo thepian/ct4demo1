@@ -6,15 +6,18 @@
 		width:50px;
 		text-align: center;
 		border-left:1px dotted black;
-		background-color:white;
+
 		z-index: 100; /* above toppanel */
 		overflow: hidden;
+		
+		background-color: rgb(167,167,167);
 
 		button {
 			width:30px;
 			margin:5px;
 			/* use text-align for now, display:block; */
 		}
+		
 	}
 }
 
@@ -22,6 +25,32 @@
 	.upper & {
 		left: -50px;
 	}
+
+		button.active-finder {
+			width: 36px; height: 30px;
+			border: 0 none;
+			background-image: url(../images/button/active-finder.png);
+			background-repeat: no-repeat;
+			background-position: 50% 50%;
+		}
+
+		button.chat {
+			width: 36px; height: 30px;
+			border: 0 none;
+			background-image: url(../images/button/chat-3.png);
+			background-repeat: no-repeat;
+			background-position: 50% 50%;
+		}
+		
+		button.help {
+			position: absolute;
+			left: 5px;
+			bottom: 20px;
+			border: 0 none;
+			background-image: url(../images/button/help.png);
+			background-repeat: no-repeat;
+			background-position: 50% 50%;
+		}
 }
 .rightcontrols {
 	.upper & {
