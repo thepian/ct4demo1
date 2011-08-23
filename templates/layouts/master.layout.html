@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block addhead %}{% end %}
+
+{% block body %}
+
+
+{% end %}
+
+{% comment %}
+{% if site.y_key %}
+  <META name="y_key" content="{{ site.y_key }}" />
+{% endif %}
+
+{% if page.window_name %}
+<script>window.name = "{{ page.window_name }}";</script>
+{% end %}
+
+{% end %}
+
+
+
+{% block bodyscripts %}
+  <script type="text/javascript" src="/js/libs/jQuery/jquery.mousewheel.js"></script>
+  <script type="text/javascript" src="/js/libs/jQuery/jquery.jscrollpane.min.js"></script>
+{% end %}

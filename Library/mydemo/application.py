@@ -45,17 +45,28 @@ class HTTPServer(tornado.httpserver.HTTPServer):
             self._socket.listen(128)
             
 
+class ObjectLike(object):
 
+    def __init__(self,d):
+        self.data = d
+
+    def __getitem__(self,key):
+        return self.data[key]
+
+    def __getattr__(self,key):
+        return self.data[key]
+        
+        
 class Application(tornado.web.Application):
     def __init__(self,site,ioloop=None):
-        self.site = site
+        self.site = ObjectLike(site)
         self.ioloop = ioloop
         try:
             allurls = __import__('conf.urls',{},{},[]).urls
             urls = getattr(allurls,site['dirname'],default_urls)
         except ImportError,e:
             print e
-            logging.error('no urls for %s using defaults' % site['dirname'], e)
+            # logging.error('no urls for %s using defaults' % site['dirname'], str(e))
             urls = default_urls
         # p = __path__[0]
         template_path = site_mod.TEMPLATES_DIR
@@ -70,7 +81,7 @@ class Application(tornado.web.Application):
             cookie_secret="11oETzKXQAGaYdkL5gEmGeJJFuYh7EQnp2XdTP1o/Vo=",
             # login_url="/auth/login",
         )
-        print urls
+
         tornado.web.Application.__init__(self, urls, **settings)
 
         # # Have one global connection to the blog DB across all handlers

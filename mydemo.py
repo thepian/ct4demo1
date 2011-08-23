@@ -14,9 +14,12 @@ def start_server(script_path,script_name):
 	import tornado.autoreload
 	
 	SITE = {
-	"path": join(script_path),
-	"dirname": "wwwsite",
-	"port":PORT
+	    "path": join(script_path),
+	    "dirname": "wwwsite",
+	    "port":PORT,
+	    
+	    "author": "Henrik Vendelbo",
+	    "description": "CT4 Demo Site",
 	}
 	
 	ioloop = tornado.ioloop.IOLoop.instance()
@@ -27,7 +30,7 @@ def start_server(script_path,script_name):
 	ioloop.start()
 
 def main(script_path,script_name):
-    print "Tornado Server on port %s, logging to testing.log" % (PORT)
+    print "Tornado Server on port %s, logging to testing.log, running in %s" % (PORT,script_path)
     sys.path.append(join(script_path,"Library","mydemo"))
     sys.path.append(join(script_path,"Library","tornado"))
 
@@ -38,6 +41,7 @@ def main(script_path,script_name):
     
     import site
     setattr(site, "TEMPLATES_DIR", join(script_path,"templates"))
+    setattr(site, "JS_DIR", join(script_path,"js"))
     setattr(site, "CSS_DIR", join(script_path,"css"))
     setattr(site, "CONF_DIR", join(script_path,"conf"))
     setattr(site, "SEED_DIR", join(script_path,"seed"))
