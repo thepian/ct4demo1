@@ -1,26 +1,160 @@
-{% extends "base.html" %}
+{% extends "../base.html" %}
 
-{% block addhead %}{% end %}
+{% block addhead %}
 
-{% block body %}
-
-
-{% end %}
-
-{% comment %}
 {% if site.y_key %}
   <META name="y_key" content="{{ site.y_key }}" />
-{% endif %}
+{% end %}
 
-{% if page.window_name %}
+{% if site.window_name %}
 <script>window.name = "{{ page.window_name }}";</script>
 {% end %}
 
 {% end %}
 
+{% block body %}
 
+<div class="indicators topbg"></div>
+<div class="indicators topleft">
+<img src="/images/caplin-logo.png">
+</div>
+<div class="indicators topcenter"></div>
+<div class="indicators topright">
+<img src="/images/right-indicators.png">
+</div>
+
+<div class="indicators bottombg"></div>
+
+<div class="content divided-66-33">
+
+	<div class="upper">{% block upper %}
+
+		<div class="leftpanel clearfix" id="leftpanel-1">
+			<div class="panel-content">{% include search_panel.html %}</div>
+		</div>
+		<div class="leftpanel clearfix" id="leftpanel-2">
+			<div class="panel-content">{% include watchlists_panel.html %}</div>
+		</div>
+		<div class="leftpanel clearfix" id="leftpanel-3">
+			<div class="panel-content">{% include chat_panel.html %}</div>
+		</div>
+
+		<div class="rightpanel clearfix" id="rightpanel-1">
+			<div class="panel-content">{% include ticket_panel.html %}</div>
+		</div>
+		<div class="rightpanel clearfix" id="rightpanel-2">
+			<div class="panel-content">{% include ticket_panel.html %}</div>
+		</div>
+		<div class="rightpanel clearfix" id="rightpanel-3">
+			<div class="panel-content">{% include ticket_panel.html %}</div>
+		</div>
+
+		<div class="leftcontrols sidecontrols">
+		<button class="active-finder" data-pop-panel="leftpanel-1">  </button>
+		<button class="" data-pop-panel="leftpanel-2"> 2 </button>
+		<button class="chat" data-pop-panel="leftpanel-3">  </button>
+		<button class="help" data-pop-panel="leftpanel-4">  </button>
+		</div>
+		<div class="rightcontrols sidecontrols">
+		<button class="" data-pop-panel="rightpanel-1"> 1 </button>
+		<button class="" data-pop-panel="rightpanel-2"> 2 </button>
+		<button class="" data-pop-panel="rightpanel-3"> 3 </button>
+		</div>
+
+		<div class="maintabs">
+			<button class="tab">Timelines</button>
+			<button class="tab">Trade Tiles</button>
+			<button class="tab">Widget App</button>
+			<button class="tab">Account Dashboard</button>
+		</div>
+
+		<div class="panel mainpanel frontpanel clearfix" id="panel-1" draggable="true">
+			<div class="panel-content">
+				<div class="column column-1">
+
+					<div class="component">
+						<div class="component-content">
+							<div>&#9660; First Component</div>
+							<div>
+								<table>
+								{% include focusable_table_row.html %} {% include focusable_table_row.html %}
+								{% include focusable_table_row.html %} {% include focusable_table_row.html %}
+								</table>
+							</div>
+						</div>
+					</div>
+
+					<div class="component">
+						<div class="component-content">
+							<div>&#9654; Second Component</div>
+							<div>
+								<table>
+								{% include focusable_table_row.html %} {% include focusable_table_row.html %}
+								{% include focusable_table_row.html %} {% include focusable_table_row.html %}
+								</table>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+				<div class="column column-2">
+
+					<div class="component">
+						<div class="component-content">
+							<div>&#9654; Third Component</div>
+							<div>
+								<table>
+								{% include focusable_table_row.html %} {% include focusable_table_row.html %}
+								{% include focusable_table_row.html %} {% include focusable_table_row.html %}
+								</table>
+							</div>
+						</div>
+					</div>
+
+					<div class="component">
+						<div class="component-content">
+							<div>&#9654; Third Component</div>
+							<div>
+								<table>
+								{% include focusable_table_row.html %} {% include focusable_table_row.html %}
+								{% include focusable_table_row.html %} {% include focusable_table_row.html %}
+								</table>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	
+		<div class="panel mainpanel clearfix" id="panel-2" draggable="true">
+			<div class="panel-content">
+				<table>
+				<tr><td>a</td><td>b</td><td>c</td><td>d</td><td>e</td></tr>
+				<tr><td>a</td><td>b</td><td>c</td><td>d</td><td>e</td></tr>
+				<tr><td>a</td><td>b</td><td>c</td><td>d</td><td>e</td></tr>
+				<tr><td>a</td><td>b</td><td>c</td><td>d</td><td>e</td></tr>
+				</table>
+			</div>
+		</div>
+
+	{% end %}</div>
+	<div class="divider">
+	<button class="divider-up">up</button>
+	<button class="divider-down">down</button>
+	</div>
+	<div class="lower">
+{% block lower %}{% end %}	
+	</div>
+
+</div>
+
+
+{% end %}
 
 {% block bodyscripts %}
   <script type="text/javascript" src="/js/libs/jQuery/jquery.mousewheel.js"></script>
   <script type="text/javascript" src="/js/libs/jQuery/jquery.jscrollpane.min.js"></script>
+  <script type="text/javascript" src="/js/mylibs/demo.js"></script>
 {% end %}

@@ -10,6 +10,7 @@ wwwsite = [
 	
 	(r"^/layouts/([^/]+)/$", LayoutHandler),
 	
+	(r"/images/(.*)", web.StaticFileHandler, { "path":site.IMAGES_DIR }),
 	(r"/js/(.*)", web.StaticFileHandler, { "path":site.JS_DIR }),
 	(r"/css/(.*)", web.StaticFileHandler, { "path":site.CSS_DIR }),
 	(r"/demo/(.*)", DemoHandler),
